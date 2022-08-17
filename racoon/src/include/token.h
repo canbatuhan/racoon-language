@@ -21,5 +21,6 @@ typedef struct token {
 } token;
 
 token init_token(char*, char*);
+void repr_token(token);
 
 #endif
