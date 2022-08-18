@@ -17,7 +17,7 @@
 
 typedef struct token {
     char* type;
-    char* value_as_string;
+    char* value;
 } token;
 
 token init_token(char*, char*);

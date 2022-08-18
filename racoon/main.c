@@ -1,31 +1,25 @@
 #include <stdio.h>
+#include <signal.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
 #include "src/include/lexer.h"
-#include "src/include/error.h"
 
 #define MAX_SIZE 256
-
-int run();
+#define NULL_CHAR -1
+#define NEW_LINE '\n'
 
 int main() {
-    run();
-}
-
-int run() {
-    lexer lexer;
-    token* token_arr;
+    token* tokens = NULL;
     char* input_text = (char*) malloc(sizeof(char)*MAX_SIZE);
 
     while (true) {
-        printf("racoon > ");
+        printf("racoon >> ");
         fgets(input_text, MAX_SIZE, stdin);
-
-        lexer = init_lexer(input_text);
-        token_arr = generate_tokens(&lexer);
-
-        if (token_arr == NULL) {
-            repr_error(init_error(INVALID_CHAR_ERR, INVALID_CHAR_ERR_DETAIL));
+        lexer lexer = init_lexer(input_text);
+        tokens = extract_tokens(&lexer);
+        if (tokens == NULL) {
+            break;
         }
     }
 
